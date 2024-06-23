@@ -1,7 +1,6 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Python application
+
+name: AI Automated pipeline
 
 on: workflow_dispatch
 
@@ -11,32 +10,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python 3.12
+    - name: Set up Python 3.13
       uses: actions/setup-python@v3
       with:
-        python-version: "3.12"
-    - name: Install dependencies
+        python-version: "3.13"
+    - name: Install python dependencies
+      working-directory: ./challenge1
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Lint with flake8
-      run: |
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: execute py script 
+        pip install -r requirements.txt
+
+    - name: Execute main script
+      working-directory: ./challenge1/src
       run: |
         python main.py
-    - shell: bash
-      run: |
-        ls -a
-    - shell: bash
-      run: |
-        expr 3 + 7 > math-homework.txt
-    - name: Upload math result for job 1
+
+    - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: homework_pre
-        path: Logs
+        name: pipeline_artifacts
+        path: |
+            challenge1/src/Logs
+            challenge1/src/Models
+

@@ -13,7 +13,7 @@ jobs:
     - name: Set up Python 3.13
       uses: actions/setup-python@v3
       with:
-        python-version: "3.13"
+        python-version: "3.12"
     - name: Install python dependencies
       working-directory: ./challenge1
       run: |

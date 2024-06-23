@@ -1,0 +1,41 @@
+from tkinter import * 
+
+TRANSFORMATION_CONSTANT = 1.60
+
+
+def calculate(value : str, label: Label) -> None:
+    if value:
+        km = str(round(TRANSFORMATION_CONSTANT* float(value),2))
+        label["text"] = km
+    
+
+def main() -> None:
+    
+    window = Tk()
+    window.title("Km to miles converter")
+    window.config(padx=20,pady=20)
+    
+    
+    
+    
+
+    miles_value = Entry(width=10)
+    miles_value.grid(row=0,column=1)
+    miles_str = Label(text="Miles").grid(row=0,column=2)
+    equal_str = Label(text="is equal to ").grid(row=1,column=0)
+    milest_int = Label(text = "0")
+    milest_int.grid(row=1,column=1)
+    km_str = Label(text = "Km").grid(row=1,column=2)
+    calculate_button = Button(text="Calculate",command= lambda : calculate(miles_value.get(),milest_int)).grid(row=2,column=1)
+                              
+    
+    
+    
+    window.mainloop()
+    
+    
+
+
+if __name__ == "__main__":
+    print("OK")
+    main()
